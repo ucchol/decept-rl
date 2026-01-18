@@ -28,3 +28,12 @@ runs/
 
 # Local config
 .env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.vscode/
+.idea/
+runs/
+*.log
+.env
