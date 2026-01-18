@@ -1,0 +1,30 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.dist/
+build/
+dist/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# OS / IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Outputs / experiments
+runs/
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local config
+.env
