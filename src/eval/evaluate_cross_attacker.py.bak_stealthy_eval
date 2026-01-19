@@ -5,7 +5,10 @@ import numpy as np
 from stable_baselines3 import PPO
 
 from src.envs.attack_graph_env import AttackGraphEnv, EnvConfig
+
 ATTACKERS = ["shortest", "stealthy", "random"]
+
+
 def eval_on_attacker(model, attacker_policy: str, episodes: int = 1000):
     env = AttackGraphEnv(EnvConfig(n_nodes=12, horizon=30, seed=123, attacker_policy=attacker_policy))
 
@@ -47,11 +50,10 @@ def main():
 
     model = PPO.load(args.model)
 
-    for attacker in ATTACKERS:
-        eval_on_attacker(model, attacker, episodes=args.episodes)
+    eval_on_attacker(model, "shortest", episodes=args.episodes)
+    eval_on_attacker(model, "random", episodes=args.episodes)
+
+
 if __name__ == "__main__":
     main()
-
-
-
 

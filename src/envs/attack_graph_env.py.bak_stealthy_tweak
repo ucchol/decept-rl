@@ -138,7 +138,7 @@ class AttackGraphEnv(gym.Env):
         Moves toward goal but prefers to avoid decoy nodes.
         Minimizes: dist_to_goal(next) + alpha * is_decoy(next)
         """
-        alpha = 10.0  # higher => more decoy-avoidant
+        alpha = 3.0  # higher => more decoy-avoidant
         nbrs = list(self.G.neighbors(self.attacker_pos))
         if not nbrs:
             return self.attacker_pos
@@ -167,12 +167,6 @@ class AttackGraphEnv(gym.Env):
             node = action - 1
             reward += self._deploy_decoy(node)
 
-        # goal-distance shaping (helps vs stealthy)
-        try:
-            d_before = nx.shortest_path_length(self.G, self.attacker_pos, self.goal_node)
-        except Exception:
-            d_before = 10**9
-
         # attacker move
         if self.cfg.attacker_policy == "random":
             next_pos = self._attacker_move_random()
@@ -181,13 +175,6 @@ class AttackGraphEnv(gym.Env):
         else:
             next_pos = self._attacker_move_shortest()
         self.attacker_pos = next_pos
-        # distance shaping: positive if attacker is pushed farther from goal
-        try:
-            d_after = nx.shortest_path_length(self.G, self.attacker_pos, self.goal_node)
-        except Exception:
-            d_after = 10**9
-        reward += 0.10 * float(d_after - d_before)
-
         self.compromised[self.attacker_pos] = 1
 
         reward += self.cfg.step_alive_reward
@@ -215,9 +202,6 @@ class AttackGraphEnv(gym.Env):
             f"decoys={int(self.is_decoy.sum())} compromised={int(self.compromised.sum())} "
             f"attacker_policy={self.cfg.attacker_policy}"
         )
-
-
-
 
 
 

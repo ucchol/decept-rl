@@ -47,11 +47,12 @@ def main():
 
     model = PPO.load(args.model)
 
-    for attacker in ATTACKERS:
-        eval_on_attacker(model, attacker, episodes=args.episodes)
+    eval_on_attacker(model, "shortest", episodes=args.episodes)
+    eval_on_attacker(model, "random", episodes=args.episodes)
+
+
 if __name__ == "__main__":
     main()
-
 
 
 
