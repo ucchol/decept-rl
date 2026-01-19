@@ -1,39 +1,14 @@
-﻿# Python
+﻿# backups / temp
+backup/
+*.bak
+*.bak_*
+*.bak.*
+*.tmp
+*.swp
+
+# python cache
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-*.egg-info/
-.dist/
-build/
-dist/
 
-# Virtual envs
-.venv/
-venv/
-env/
-
-# OS / IDE
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-# Outputs / experiments
+# training outputs
 runs/
-*.log
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Local config
-.env
-__pycache__/
-*.pyc
-.venv/
-venv/
-.vscode/
-.idea/
-runs/
-*.log
-.env
